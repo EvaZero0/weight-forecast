@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weight Forecast</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Weight Forecast</h1>
+      <p class="tagline">
+        Understand the relationship between caloric intake and your weight goal.
+      </p>
+    </header>
+
+    <div class="how-it-works">
+      <p>
+        Enter your body metrics and daily calorie intake — the app estimates how
+        long it will take to reach your target weight, using iterative daily
+        recalculation of your metabolic rate as your weight changes.
+      </p>
+    </div>
+
+    <details class="disclaimer-block">
+      <summary>
+        Important disclaimers & health warnings — please read before using
+      </summary>
+
+      <div class="disclaimer-body">
+        <div class="disclaimer-section">
+          <h3>Developer note</h3>
+          <p>
+            The algorithms used here are mathematical
+            approximations and should be viewed as rough estimates only. They do
+            not account for individual metabolic differences, medical
+            conditions, or body composition.
+          </p>
+        </div>
+
+        <div class="disclaimer-section">
+          <h3>Health &amp; safety</h3>
+          <ul>
+            <li>
+              <strong>Consult a professional</strong> before starting any weight
+              loss journey or significantly changing your diet.
+            </li>
+            <li>
+              <strong>Calorie deficits:</strong> A high calorie deficit is not
+              suitable for everyone and can be dangerous. Sustainable weight
+              management looks different for each person.
+            </li>
+            <li>
+              <strong>Accuracy:</strong> The numbers provided are mathematical
+              estimates, not biological facts.
+            </li>
+          </ul>
+        </div>
+
+        <div class="disclaimer-section disclaimer-mental-health">
+          <h3>A note on mental health ❤️</h3>
+          <p>
+            If you have a history of eating disorders, or if tracking numbers,
+            weight, or calories negatively affects your mental health or causes
+            anxiety — please do not use this app. Your well-being is more
+            important than any number on a scale. If you are struggling, please
+            reach out to a professional or a support hotline in your country.
+          </p>
+        </div>
+      </div>
+    </details>
+
+    <div class="card">
+      <div class="section-title">Body measurements</div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="currentWeight">Current weight (kg)</label>
+          <input
+            type="number"
+            id="currentWeight"
+            step="0.1"
+            min="30"
+            max="300"
+            placeholder="e.g. 85"
+          />
+        </div>
+        <div class="field">
+          <label for="desiredWeight">Target weight (kg)</label>
+          <input
+            type="number"
+            id="desiredWeight"
+            step="0.1"
+            min="30"
+            max="300"
+            placeholder="e.g. 75"
+          />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="height">Height (cm)</label>
+          <input
+            type="number"
+            id="height"
+            step="0.1"
+            min="100"
+            max="250"
+            placeholder="e.g. 175"
+          />
+        </div>
+        <div class="field">
+          <label for="age">Age (years)</label>
+          <input
+            type="number"
+            id="age"
+            step="1"
+            min="10"
+            max="110"
+            placeholder="e.g. 35"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="sex">Sex</label>
+        <select id="sex">
+          <option value="male">Male</option>
+          <option value="female">Female/Other</option>
+        </select>
+      </div>
+      <!-- BMI Preview -->
+      <div id="bmiPreview" hidden>
+        <div class="bmi-row">
+          <div class="bmi-item">
+            <div class="bmi-label">BMI now</div>
+            <div class="bmi-val" id="bmiStartVal">-</div>
+            <div class="bmi-class" id="bmiStartClass"></div>
+          </div>
+          <div id="bmiTargetGroup">
+            <div class="bmi-arrow">→</div>
+            <div class="bmi-item">
+              <div class="bmi-label">BMI at target</div>
+              <div class="bmi-val" id="bmiTargetVal">-</div>
+              <div class="bmi-class" id="bmiTargetClass"></div>
+            </div>
+          </div>
+        </div>
+        <p id="bmiWarning" class="bmi-warning" hidden>
+          ⚠ Your target weight falls into the underweight range (BMI &lt; 18.5).
+          Please reconsider your goal or consult a medical professional.
+        </p>
+      </div>
+      <div class="section-title">Activity level</div>
+
+      <div class="field">
+        <label for="neat">Daily lifestyle</label>
+        <select id="neat">
+          <option value="0.02" selected>
+            Mostly sitting — remote work, car commute, little walking
+          </option>
+          <option value="0.10">
+            Light daily movement — transit commute, errands, some walking
+          </option>
+          <option value="0.20">
+            Moderately active day — on feet regularly (retail, teaching,
+            parenting)
+          </option>
+          <option value="0.35">
+            Very active day — physical job, stay-at-home parent with young kids
+          </option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="eat">Structured exercise</label>
+        <select id="eat">
+          <option value="0.0" selected>No structured exercise</option>
+          <option value="0.1">1–2x per week — occasional gym or sport</option>
+          <option value="0.2">3–4x per week — regular moderate training</option>
+          <option value="0.3">5–6x per week — frequent intense training</option>
+          <option value="0.4">
+            Daily or twice daily — competitive / high-performance
+          </option>
+        </select>
+      </div>
+
+      <div class="factor-display">
+        <span class="factor-val" id="factorVal">x 1.40</span>
+        <div class="factor-bar-wrap">
+          <div class="factor-bar" id="factorBar"></div>
+        </div>
+        <span class="factor-label" id="factorLabel">Lightly active</span>
+      </div>
+      <p class="estimate-note">
+        Activity multiplier is an informed estimate (NEAT + EAT components,
+        Mifflin-St Jeor basis). Inherent uncertainty: approx. ±10%.
+      </p>
+
+      <div class="section-title">Calorie intake</div>
+
+      <div class="field">
+        <label for="dailyIntake">Estimated daily intake (kcal)</label>
+        <input
+          type="number"
+          id="dailyIntake"
+          step="1"
+          min="500"
+          max="10000"
+          placeholder="e.g. 1800"
+        />
+      </div>
+      <button id="calcBtn">Calculate forecast</button>
+    </div>
+    <div id="results" hidden>
+      <div class="result-card">
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="val" id="resDays">-</div>
+            <div class="lbl">Days</div>
+          </div>
+          <div class="result-item">
+            <div class="val" id="resDate">-</div>
+            <div class="lbl">Est. date</div>
+          </div>
+          <div class="result-item">
+            <div class="val" id="resFinalWeight">-</div>
+            <div class="lbl">Final weight</div>
+          </div>
+        </div>
+        <p id="plateauNote" class="plateau-note" hidden></p>
+      </div>
+      <div class="chart-card">
+        <canvas id="weightChart"></canvas>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
