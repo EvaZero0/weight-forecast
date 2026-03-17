@@ -236,6 +236,58 @@
         <canvas id="weightChart"></canvas>
       </div>
     </div>
+
+    <div id="macroCard" class="macro-card" hidden>
+      <div class="macro-card-header">
+        <span class="macro-card-title">Macro recommendations</span>
+        <span class="macro-card-sub">Based on your current weight &amp; daily intake</span>
+      </div>
+      <div class="macro-table">
+        <div class="macro-row macro-row--header">
+          <span></span>
+          <span>Range</span>
+          <span>Calories</span>
+          <span>Source</span>
+        </div>
+        <div class="macro-row">
+          <span class="macro-name"><span class="macro-dot macro-dot--protein"></span>Protein</span>
+          <span class="macro-val" id="macroProteinRange">—</span>
+          <span class="macro-kcal" id="macroProteinKcal">—</span>
+          <span class="macro-src" id="macroProteinNote">—</span>
+        </div>
+        <div class="macro-row">
+          <span class="macro-name"><span class="macro-dot macro-dot--fat"></span>Fat</span>
+          <span class="macro-val" id="macroFatRange">—</span>
+          <span class="macro-kcal" id="macroFatKcal">—</span>
+          <span class="macro-src" id="macroFatNote">—</span>
+        </div>
+        <div class="macro-row">
+          <span class="macro-name"><span class="macro-dot macro-dot--fiber"></span>Fibre</span>
+          <span class="macro-val" id="macroFiberRange">—</span>
+          <span class="macro-kcal" id="macroFiberKcal">—</span>
+          <span class="macro-src" id="macroFiberNote">—</span>
+        </div>
+        <div class="macro-row macro-row--carbs">
+          <span class="macro-name"><span class="macro-dot macro-dot--carbs"></span>Carbs</span>
+          <span class="macro-val" id="macroCarbsRange">—</span>
+          <span class="macro-kcal" id="macroCarbsKcal">—</span>
+          <span class="macro-src" id="macroCarbsNote">—</span>
+        </div>
+      </div>
+      <p class="macro-footer">
+        Ranges show minimum – optimum. Carbs show the maximum budget remaining after protein &amp; fat minimums are covered. Fibre has no counted caloric value.
+      </p>
+    </div>
+
+    <div id="macroChartCard" class="macro-chart-card" hidden>
+      <div class="macro-chart-header">
+        <span class="macro-card-title">Calorie distribution</span>
+        <span class="macro-card-sub">Minimum values · based on daily intake</span>
+      </div>
+      <div class="macro-chart-wrap">
+        <canvas id="macroChart"></canvas>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

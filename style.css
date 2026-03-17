@@ -529,3 +529,152 @@ select {
 #bmiTargetGroup[hidden] {
     display: none;
 }
+/* ── Macro card ──────────────────────────────────────────────────── */
+.macro-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.macro-card-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.macro-card-title {
+    font-size: 0.68rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.macro-card-sub {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.macro-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.macro-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1.4fr 1.6fr 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.5rem;
+    border-radius: var(--radius);
+}
+
+.macro-row + .macro-row {
+    border-top: 1px solid var(--border);
+}
+
+.macro-row--header {
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--border);
+    border-top: none !important;
+}
+
+.macro-row--header span {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.macro-row--carbs {
+    opacity: 0.6;
+}
+
+.macro-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-primary);
+}
+
+.macro-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.macro-dot--protein { background: #c8855a; }
+.macro-dot--fat     { background: #a8b85a; }
+.macro-dot--fiber   { background: #5a9a7a; }
+.macro-dot--carbs   { background: #8a8a9a; }
+
+.macro-val {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.macro-kcal {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.macro-src {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-align: right;
+}
+
+.macro-footer {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid var(--border);
+    line-height: 1.55;
+}
+
+@media (max-width: 480px) {
+    .macro-src { display: none; }
+    .macro-row { grid-template-columns: 1.2fr 1.2fr 1.4fr; }
+}
+
+/* ── Macro pie chart card ─────────────────────────────────────────── */
+.macro-chart-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    max-width: 560px;
+    margin: 0 auto 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.macro-chart-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.macro-chart-wrap {
+    max-width: 280px;
+    margin: 0 auto;
+}
